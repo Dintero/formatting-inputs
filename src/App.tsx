@@ -1,7 +1,8 @@
-import "./App.css";
-import NumberInput from "./components/NumberInput";
-import BlocksRangeInput from "./components/BlocksRangeInput";
 import { useState } from "react";
+
+import "./App.css";
+import BlocksRangeInput from "./components/BlocksRangeInput";
+import NumberInput from "./components/NumberInput";
 
 function App() {
     const [name, setName] = useState("test");

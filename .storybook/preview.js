@@ -1,4 +1,5 @@
 import * as jest from "jest-mock";
+
 window.jest = jest;
 
 export const parameters = {

@@ -1,10 +1,11 @@
 import React, { useMemo, useRef } from "react";
+
 import {
     createBlurEventManipulator,
     createChangeEventManipulator,
 } from "../helpers";
-import { formatNumber, checkDidRemoveDecimalDelimiter } from "./numberHelpers";
 import { InputManipulator } from "../types";
+import { checkDidRemoveDecimalDelimiter, formatNumber } from "./numberHelpers";
 import { NumberInputOptions } from "./types";
 
 interface NumberInputProps extends React.InputHTMLAttributes<HTMLInputElement> {

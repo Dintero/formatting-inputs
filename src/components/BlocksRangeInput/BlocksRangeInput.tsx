@@ -1,13 +1,14 @@
 import React, { useMemo, useRef } from "react";
+
 import {
     createBlurEventManipulator,
     createChangeEventManipulator,
 } from "../helpers";
-import {
-    formatBlocksRange,
-    checkShouldAddTrailingSeparator,
-} from "./blocksRangeHelpers";
 import { InputManipulator } from "../types";
+import {
+    checkShouldAddTrailingSeparator,
+    formatBlocksRange,
+} from "./blocksRangeHelpers";
 import { BlocksRangeInputOptions } from "./types";
 
 interface BlocksRangeInputProps

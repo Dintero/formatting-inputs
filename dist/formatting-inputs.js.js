@@ -8,43 +8,62 @@ const je = (a, o, i) => (n) => {
 }, De = (a, o, i) => (n) => {
   const l = a.current;
   l && o(l, "blur"), i && i(n);
-}, xe = (a, o) => {
-  const i = o.delimiter || ".", n = a.split("").reverse();
-  for (let l = 0; l < n.length; l++)
-    if (l <= (o.decimals || 0)) {
-      const s = n[l];
-      if ([",", "."].includes(s))
-        return s;
+}, A = " ", pr = (a) => {
+  const { blocks: o = [], separators: i = [], overflow: n = !1 } = a, l = n ? 0 : 1;
+  return o.length - l > i.length ? [...i, A] : i;
+}, gr = (a, o, i) => (i && (a = a.filter((n) => i.test(n))), a.filter(
+  (n) => !(o || [A]).includes(n)
+)), mr = (a, o, i, n, l) => {
+  if (!o || o.length === 0)
+    return a.join("");
+  const s = o.map((v, c) => {
+    var w;
+    const d = a.splice(0, v), R = d.length === v, b = c === o.length - 1, m = a.length;
+    if (!b && m || R && l && !b) {
+      const F = (w = (i || [])[c]) != null ? w : A;
+      d.push(F);
     }
-  return i;
-}, pr = (a, o, i, n) => (n ? a.replace(/^0+/, "") || "0" : a).split("").reverse().reduce((v, c, d) => {
-  const R = d % 3 === 0 && d > 0;
-  return `${c}${R ? o : ""}${v}`;
-}, "") || (i ? "0" : ""), gr = (a, o, i) => {
-  const n = a.substring(0, o);
-  return i ? n.padEnd(o, "0") : n;
-}, ke = (a, o, i) => {
-  if (a === "")
-    return "";
-  const { separator: n = " ", decimals: l = 0, delimiter: s = "." } = o, v = xe(a, o), c = a.includes(v), [d = "", R = ""] = a.split(v).map((q) => q.replace(/\D/g, ""));
-  if (!c && d === "" && R === "")
-    return "";
-  const b = i === "blur" && l > 0, m = gr(
-    R,
-    l,
-    b
-  ), T = l > 0 && (c || b);
-  return `${pr(
-    d,
+    return d.join("");
+  });
+  return n && a.length && (s.push((i || [])[o.length] || A), s.push(a.join(""))), s.join("");
+}, xe = (a, o, i) => {
+  var d;
+  const n = (a || "").split(""), l = o.blocks || [], s = pr(o), v = gr(
     n,
-    i === "blur" && T,
-    i === "blur"
-  )}${T ? s : ""}${m}`;
-}, mr = (a, o, i) => {
-  const n = xe(a, i), l = a.replace(n, "");
-  return a.includes(n) && l === o;
+    s,
+    o.range
+  );
+  return mr(
+    v,
+    l,
+    s,
+    (d = o.overflow) != null ? d : !1,
+    i != null ? i : !1
+  );
+}, br = (a, o) => {
+  var s, v;
+  const i = ((s = o.blocks) != null ? s : []).reduce(
+    (c, d) => c + d,
+    0
+  ), n = new Array(
+    (Math.max(((v = o.blocks) != null ? v : []).length - 1), 0)
+  ).fill("").reduce((c, d, R) => {
+    var m, T;
+    const b = (T = ((m = o.separators) != null ? m : [])[R]) != null ? T : A;
+    return c + b.length;
+  }, 0), l = i + n;
+  return a.length >= l;
+}, Er = (a, o, i, n, l) => {
+  var s;
+  if (i === "change")
+    return n && l;
+  if (i === "blur") {
+    const v = ((s = o.separators) != null ? s : [A]).includes(a[a.length - 1]);
+    return !br(a, o) && v;
+  }
+  return !1;
 };
-var Ae = { exports: {} }, L = {};
+var ke = { exports: {} }, L = {};
 /**
  * @license React
  * react-jsx-runtime.production.min.js
@@ -55,7 +74,7 @@ var Ae = { exports: {} }, L = {};
  * LICENSE file in the root directory of this source tree.
  */
 var Pe;
-function br() {
+function Rr() {
   if (Pe)
     return L;
   Pe = 1;
@@ -83,7 +102,7 @@ var W = {};
  * LICENSE file in the root directory of this source tree.
  */
 var Ce;
-function Er() {
+function yr() {
   return Ce || (Ce = 1, process.env.NODE_ENV !== "production" && function() {
     var a = Oe, o = Symbol.for("react.element"), i = Symbol.for("react.portal"), n = Symbol.for("react.fragment"), l = Symbol.for("react.strict_mode"), s = Symbol.for("react.profiler"), v = Symbol.for("react.provider"), c = Symbol.for("react.context"), d = Symbol.for("react.forward_ref"), R = Symbol.for("react.suspense"), b = Symbol.for("react.suspense_list"), m = Symbol.for("react.memo"), T = Symbol.for("react.lazy"), w = Symbol.for("react.offscreen"), F = Symbol.iterator, ee = "@@iterator";
     function q(e) {
@@ -661,17 +680,17 @@ Check the top-level render call using <` + t + ">.");
   }()), W;
 }
 (function(a) {
-  process.env.NODE_ENV === "production" ? a.exports = br() : a.exports = Er();
-})(Ae);
-const Fe = Ae.exports.jsx, Rr = (a, o) => {
+  process.env.NODE_ENV === "production" ? a.exports = Rr() : a.exports = yr();
+})(ke);
+const Ae = ke.exports.jsx, _r = (a, o) => {
   let i = a;
   return (n, l) => {
     const {
       value: s,
       selectionStart: v,
       selectionEnd: c
-    } = n, d = i.length < s.length, R = s.length === v && s.length === c, b = mr(i, s, o), m = ke(s, o, l);
-    n.value = m, l === "change" && (R ? (n.selectionStart = m.length, n.selectionEnd = m.length) : d ? (n.selectionStart = (v || 0) + (m.length - s.length), n.selectionEnd = (c || 0) + (m.length - s.length)) : b ? (n.selectionStart = (v || 0) + 1, n.selectionEnd = (c || 0) + 1) : (n.selectionStart = v, n.selectionEnd = c)), i = n.value;
+    } = n, d = i.length < s.length, R = s.length === v && s.length === c, b = Er(s, o, l, d, R), m = xe(s, o, b);
+    n.value = m, l === "change" && (R ? (n.selectionStart = m.length, n.selectionEnd = m.length) : (n.selectionStart = v, n.selectionEnd = c)), i = n.value;
   };
 }, wr = ({
   options: a,
@@ -680,8 +699,68 @@ const Fe = Ae.exports.jsx, Rr = (a, o) => {
   onBlur: n,
   ...l
 }) => {
-  const s = V(() => ke(o ? o + "" : "", a, "blur"), [o, a]), v = V(() => Rr(s, a), [s, a]), c = we(null);
-  return /* @__PURE__ */ Fe("input", {
+  const s = V(() => xe(o ? o + "" : "", a, !1), [o, a]), v = V(() => _r(s, a), [s, a]), c = we(null);
+  return /* @__PURE__ */ Ae("input", {
+    ref: c,
+    defaultValue: s != null ? s : "",
+    onChange: je(c, v, i),
+    onBlur: De(c, v, n),
+    ...l
+  });
+}, Fe = (a, o) => {
+  const i = o.delimiter || ".", n = a.split("").reverse();
+  for (let l = 0; l < n.length; l++)
+    if (l <= (o.decimals || 0)) {
+      const s = n[l];
+      if ([",", "."].includes(s))
+        return s;
+    }
+  return i;
+}, Sr = (a, o, i, n) => (n ? a.replace(/^0+/, "") || "0" : a).split("").reverse().reduce((v, c, d) => {
+  const R = d % 3 === 0 && d > 0;
+  return `${c}${R ? o : ""}${v}`;
+}, "") || (i ? "0" : ""), Tr = (a, o, i) => {
+  const n = a.substring(0, o);
+  return i ? n.padEnd(o, "0") : n;
+}, Ie = (a, o, i) => {
+  if (a === "")
+    return "";
+  const { separator: n = " ", decimals: l = 0, delimiter: s = "." } = o, v = Fe(a, o), c = a.includes(v), [d = "", R = ""] = a.split(v).map((q) => q.replace(/\D/g, ""));
+  if (!c && d === "" && R === "")
+    return "";
+  const b = i === "blur" && l > 0, m = Tr(
+    R,
+    l,
+    b
+  ), T = l > 0 && (c || b);
+  return `${Sr(
+    d,
+    n,
+    i === "blur" && T,
+    i === "blur"
+  )}${T ? s : ""}${m}`;
+}, Pr = (a, o, i) => {
+  const n = Fe(a, i), l = a.replace(n, "");
+  return a.includes(n) && l === o;
+}, Cr = (a, o) => {
+  let i = a;
+  return (n, l) => {
+    const {
+      value: s,
+      selectionStart: v,
+      selectionEnd: c
+    } = n, d = i.length < s.length, R = s.length === v && s.length === c, b = Pr(i, s, o), m = Ie(s, o, l);
+    n.value = m, l === "change" && (R ? (n.selectionStart = m.length, n.selectionEnd = m.length) : d ? (n.selectionStart = (v || 0) + (m.length - s.length), n.selectionEnd = (c || 0) + (m.length - s.length)) : b ? (n.selectionStart = (v || 0) + 1, n.selectionEnd = (c || 0) + 1) : (n.selectionStart = v, n.selectionEnd = c)), i = n.value;
+  };
+}, jr = ({
+  options: a,
+  defaultValue: o,
+  onChange: i,
+  onBlur: n,
+  ...l
+}) => {
+  const s = V(() => Ie(o ? o + "" : "", a, "blur"), [o, a]), v = V(() => Cr(s, a), [s, a]), c = we(null);
+  return /* @__PURE__ */ Ae("input", {
     ref: c,
     defaultValue: s != null ? s : "",
     onChange: je(c, v, i),
@@ -692,87 +771,8 @@ const Fe = Ae.exports.jsx, Rr = (a, o) => {
     },
     ...l
   });
-}, A = " ", yr = (a) => {
-  const { blocks: o = [], separators: i = [], overflow: n = !1 } = a, l = n ? 0 : 1;
-  return o.length - l > i.length ? [...i, A] : i;
-}, _r = (a, o, i) => (i && (a = a.filter((n) => i.test(n))), a.filter(
-  (n) => !(o || [A]).includes(n)
-)), Sr = (a, o, i, n, l) => {
-  if (!o || o.length === 0)
-    return a.join("");
-  const s = o.map((v, c) => {
-    var w;
-    const d = a.splice(0, v), R = d.length === v, b = c === o.length - 1, m = a.length;
-    if (!b && m || R && l && !b) {
-      const F = (w = (i || [])[c]) != null ? w : A;
-      d.push(F);
-    }
-    return d.join("");
-  });
-  return n && a.length && (s.push((i || [])[o.length] || A), s.push(a.join(""))), s.join("");
-}, Ie = (a, o, i) => {
-  var d;
-  const n = (a || "").split(""), l = o.blocks || [], s = yr(o), v = _r(
-    n,
-    s,
-    o.range
-  );
-  return Sr(
-    v,
-    l,
-    s,
-    (d = o.overflow) != null ? d : !1,
-    i != null ? i : !1
-  );
-}, Tr = (a, o) => {
-  var s, v;
-  const i = ((s = o.blocks) != null ? s : []).reduce(
-    (c, d) => c + d,
-    0
-  ), n = new Array(
-    (Math.max(((v = o.blocks) != null ? v : []).length - 1), 0)
-  ).fill("").reduce((c, d, R) => {
-    var m, T;
-    const b = (T = ((m = o.separators) != null ? m : [])[R]) != null ? T : A;
-    return c + b.length;
-  }, 0), l = i + n;
-  return a.length >= l;
-}, Pr = (a, o, i, n, l) => {
-  var s;
-  if (i === "change")
-    return n && l;
-  if (i === "blur") {
-    const v = ((s = o.separators) != null ? s : [A]).includes(a[a.length - 1]);
-    return !Tr(a, o) && v;
-  }
-  return !1;
-}, Cr = (a, o) => {
-  let i = a;
-  return (n, l) => {
-    const {
-      value: s,
-      selectionStart: v,
-      selectionEnd: c
-    } = n, d = i.length < s.length, R = s.length === v && s.length === c, b = Pr(s, o, l, d, R), m = Ie(s, o, b);
-    n.value = m, l === "change" && (R ? (n.selectionStart = m.length, n.selectionEnd = m.length) : (n.selectionStart = v, n.selectionEnd = c)), i = n.value;
-  };
-}, jr = ({
-  options: a,
-  defaultValue: o,
-  onChange: i,
-  onBlur: n,
-  ...l
-}) => {
-  const s = V(() => Ie(o ? o + "" : "", a, !1), [o, a]), v = V(() => Cr(s, a), [s, a]), c = we(null);
-  return /* @__PURE__ */ Fe("input", {
-    ref: c,
-    defaultValue: s != null ? s : "",
-    onChange: je(c, v, i),
-    onBlur: De(c, v, n),
-    ...l
-  });
 };
 export {
-  jr as BlocksRangeInput,
-  wr as NumberInput
+  wr as BlocksRangeInput,
+  jr as NumberInput
 };

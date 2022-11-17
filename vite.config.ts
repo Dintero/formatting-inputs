@@ -14,7 +14,9 @@ export default defineConfig({
             fileName: (format) => `formatting-inputs.${format}.js`,
         },
         rollupOptions: {
-            external: ["react", "react-dom"],
+            // make sure to externalize deps that shouldn't be bundled
+            // into your library
+            external: ["react", "react-dom", "react/jsx-runtime"],
             output: {
                 globals: {
                     react: "React",

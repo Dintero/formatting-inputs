@@ -53,12 +53,13 @@
     "files": [
         "dist"
     ],
-    "main": "./dist/formatting-inputs.umd.js",
-    "module": "./dist/formatting-inputs.es.js",
+    "main": "./dist/formatting-inputs.cjs",
+    "module": "./dist/formatting-inputs.js",
     "types": "./dist/index.d.ts",
     "exports": {
         ".": {
-            "import": "./dist/formatting-inputs.es.js"
+            "import": "./dist/formatting-inputs.js",
+            "require": "./dist/formatting-inputs.cjs"
         }
     }
 }

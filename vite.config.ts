@@ -10,8 +10,8 @@ export default defineConfig({
         lib: {
             entry: resolve(__dirname, "src/components/index.ts"),
             name: "FormattingInputs",
-            formats: ["es"],
-            fileName: "formatting-inputs.js",
+            formats: ["es", "cjs"],
+            fileName: "formatting-inputs",
         },
         rollupOptions: {
             // make sure to externalize deps that shouldn't be bundled

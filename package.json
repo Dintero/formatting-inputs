@@ -13,15 +13,13 @@
         "prettier-check": "prettier --check .",
         "prettier-fix": "prettier --write ."
     },
-    "dependencies": {
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0"
-    },
     "peerDependencies": {
-        "react": "^17.0.0 || ^18.0.0",
-        "react-dom": "^17.0.0 || ^18.0.0"
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2"
     },
     "devDependencies": {
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
         "@babel/core": "^7.18.13",
         "@storybook/addon-actions": "^6.5.10",
         "@storybook/addon-essentials": "^6.5.10",
@@ -32,8 +30,8 @@
         "@storybook/testing-library": "^0.0.13",
         "@trivago/prettier-plugin-sort-imports": "^3.4.0",
         "@types/jest": "^28.1.8",
-        "@types/react": "^18.0.17",
-        "@types/react-dom": "^18.0.6",
+        "@types/react": "^17.0.21",
+        "@types/react-dom": "^17.0.9",
         "@typescript-eslint/eslint-plugin": "^5.34.0",
         "@typescript-eslint/parser": "^5.34.0",
         "@vitejs/plugin-react": "^2.0.1",
@@ -53,13 +51,13 @@
     "files": [
         "dist"
     ],
-    "main": "./dist/formatting-inputs.cjs",
-    "module": "./dist/formatting-inputs.js",
+    "main": "./dist/formatting-inputs.umd.js",
+    "module": "./dist/formatting-inputs.es.js",
     "types": "./dist/index.d.ts",
     "exports": {
         ".": {
-            "import": "./dist/formatting-inputs.js",
-            "require": "./dist/formatting-inputs.cjs"
+            "import": "./dist/formatting-inputs.es.js",
+            "require": "./dist/formatting-inputs.umd.js"
         }
     }
 }

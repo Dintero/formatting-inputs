@@ -11,10 +11,6 @@ export const createChangeEventManipulator = (
             manipulator(current, "change");
         }
         if (onChange) {
-            console.log({
-                targetValue: e.target.value,
-                currentValue: current?.value,
-            });
             onChange(e);
         }
     };

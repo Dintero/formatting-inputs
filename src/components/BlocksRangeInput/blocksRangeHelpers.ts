@@ -41,7 +41,6 @@ const addBlocksRangeFormat = (
         const isFullBlock = part.length === block;
         const isLastBlock = i === blocks.length - 1;
         const hasNextPart = chars.length;
-        // console.log({hasNextPart, isFullBlock, isLastBlock, addTrailingSeparator});
         const shouldAddSeparator =
             (!isLastBlock && hasNextPart) ||
             (isFullBlock && addTrailingSeparator && !isLastBlock);

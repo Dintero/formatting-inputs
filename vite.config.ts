@@ -5,7 +5,10 @@ import dts from "vite-plugin-dts";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [react({jsxRuntime: 'classic'}), dts({ insertTypesEntry: true })],
+    plugins: [
+        react({ jsxRuntime: "classic" }),
+        dts({ insertTypesEntry: true }),
+    ],
     build: {
         lib: {
             entry: resolve(__dirname, "src/components/index.ts"),

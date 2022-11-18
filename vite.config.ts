@@ -5,7 +5,10 @@ import dts from "vite-plugin-dts";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [react(), dts({ insertTypesEntry: true })],
+    plugins: [
+        react({ jsxRuntime: "classic" }),
+        dts({ insertTypesEntry: true }),
+    ],
     build: {
         lib: {
             entry: resolve(__dirname, "src/components/index.ts"),
@@ -16,7 +19,7 @@ export default defineConfig({
         rollupOptions: {
             // make sure to externalize deps that shouldn't be bundled
             // into your library
-            external: ["react", "react-dom", "react/jsx-runtime"],
+            external: ["react", "react-dom"],
             output: {
                 globals: {
                     react: "React",

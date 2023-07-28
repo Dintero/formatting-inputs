@@ -1,22 +1,10 @@
 import { ManipulatorEventType } from "../types";
 import { NumberInputOptions } from "./types";
 
-const getActualDelimiter = (value: string, options: NumberInputOptions) => {
-    const optionDelimiter = options.delimiter || ".";
-
-    // Scan input from right to left and find the first delimiter
-    const chars = value.split("").reverse();
-    for (let i = 0; i < chars.length; i++) {
-        if (i <= (options.decimals || 0)) {
-            const char = chars[i];
-            if ([",", "."].includes(char)) {
-                return char;
-            }
-        }
-    }
-
-    return optionDelimiter;
-};
+const DEFAULT_DELIMITER = ".";
+const DEFAULT_SEPARATOR = " ";
+const DEFAULT_DECIMALS = 0;
+const DEFAULT_PAD_DECIMALS = false;
 
 const formatDiscreteNumberPart = (
     value: string,
@@ -57,23 +45,28 @@ export const formatNumber = (
     if (value === "") {
         return "";
     }
-    const { separator = " ", decimals = 0, delimiter = "." } = options;
-    const actualDelimiter = getActualDelimiter(value, options);
-    const hasDelimiter = value.includes(actualDelimiter);
+    const {
+        delimiter = DEFAULT_DELIMITER,
+        separator = DEFAULT_SEPARATOR,
+        decimals = DEFAULT_DECIMALS,
+        padDecimals = DEFAULT_PAD_DECIMALS,
+    } = options;
+    const hasDelimiter = value.includes(delimiter);
     const [discrete = "", decimal = ""] = value
-        .split(actualDelimiter)
+        .split(delimiter)
         .map((v) => v.replace(/\D/g, ""));
     if (!hasDelimiter && discrete === "" && decimal === "") {
         return "";
     }
-    const shouldPadDecimals = event === "blur" && decimals > 0;
+    const shouldPadDecimals = event === "blur" && decimals > 0 && padDecimals;
     const decimalFormatted = formatDecimalNumberPart(
         decimal,
         decimals,
         shouldPadDecimals,
     );
-    const addDecimals = decimals > 0 && (hasDelimiter || shouldPadDecimals);
-    const shouldDiscreteAddZeroIfEmpty = event === "blur" && addDecimals;
+    const shouldAddDecimals =
+        decimals > 0 && (hasDelimiter || shouldPadDecimals);
+    const shouldDiscreteAddZeroIfEmpty = event === "blur" && shouldAddDecimals;
     const shouldStripLeadingZeros = event === "blur";
     const formattedDiscrete = formatDiscreteNumberPart(
         discrete,
@@ -81,9 +74,11 @@ export const formatNumber = (
         shouldDiscreteAddZeroIfEmpty,
         shouldStripLeadingZeros,
     );
-    return `${formattedDiscrete}${
-        addDecimals ? delimiter : ""
-    }${decimalFormatted}`;
+    const shouldStripTralingDelimiters =
+        event === "blur" && decimalFormatted === "";
+    const formattedDelimiter =
+        shouldAddDecimals && !shouldStripTralingDelimiters ? delimiter : "";
+    return `${formattedDiscrete}${formattedDelimiter}${decimalFormatted}`;
 };
 
 export const checkDidRemoveDecimalDelimiter = (
@@ -91,7 +86,7 @@ export const checkDidRemoveDecimalDelimiter = (
     value: string,
     options: NumberInputOptions,
 ) => {
-    const actualDelimiter = getActualDelimiter(oldValue, options);
-    const oldWithoutDelimiter = oldValue.replace(actualDelimiter, "");
-    return oldValue.includes(actualDelimiter) && oldWithoutDelimiter === value;
+    const { delimiter = DEFAULT_DELIMITER } = options;
+    const oldWithoutDelimiter = oldValue.replace(delimiter, "");
+    return oldValue.includes(delimiter) && oldWithoutDelimiter === value;
 };

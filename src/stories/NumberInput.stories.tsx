@@ -20,6 +20,7 @@ export const DefaultWithDecimals = Template.bind({});
 DefaultWithDecimals.args = {
     options: {
         decimals: 2,
+        padDecimals: false,
     },
     placeholder: "0.00",
 };
@@ -31,6 +32,7 @@ Norwegian.args = {
         decimals: 2,
         delimiter: ",",
         separator: ".",
+        padDecimals: false,
     },
     placeholder: "1.000,00",
 };
@@ -42,6 +44,7 @@ SwedishDanishFinish.args = {
         decimals: 2,
         delimiter: ",",
         separator: " ",
+        padDecimals: false,
     },
     placeholder: "1 000,00",
 };
@@ -53,6 +56,7 @@ English.args = {
         decimals: 2,
         delimiter: ".",
         separator: ",",
+        padDecimals: false,
     },
     placeholder: "1,000.00",
 };

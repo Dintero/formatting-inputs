@@ -8,7 +8,8 @@ import { InputManipulator } from "../types";
 import { checkDidRemoveDecimalDelimiter, formatNumber } from "./numberHelpers";
 import { NumberInputOptions } from "./types";
 
-interface NumberInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface NumberInputProps
+    extends React.InputHTMLAttributes<HTMLInputElement> {
     options: NumberInputOptions;
 }
 

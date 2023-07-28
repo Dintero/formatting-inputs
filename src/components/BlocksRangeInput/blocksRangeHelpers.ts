@@ -1,5 +1,5 @@
-import { ManipulatorEventType } from "../types";
-import { BlocksRangeInputOptions } from "./types";
+import type { ManipulatorEventType } from "../types";
+import type { BlocksRangeInputOptions } from "./types";
 
 const defaultSeparator = " ";
 

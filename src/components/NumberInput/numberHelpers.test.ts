@@ -39,6 +39,15 @@ test("formatNumber() number with decimals missing in input 12 345 on blur", () =
         { separator: " ", decimals: 2 },
         "blur",
     );
+    expect(result).toEqual("12 345");
+});
+
+test("formatNumber() number with decimals missing in input 12 345 on blur with padDecimals", () => {
+    const result = numberHelpers.formatNumber(
+        "12345",
+        { separator: " ", decimals: 2, padDecimals: true },
+        "blur",
+    );
     expect(result).toEqual("12 345.00");
 });
 
@@ -46,6 +55,15 @@ test("formatNumber() number with decimals partial in input 12 345.1 on blur", ()
     const result = numberHelpers.formatNumber(
         "12345.1",
         { separator: " ", decimals: 2 },
+        "blur",
+    );
+    expect(result).toEqual("12 345.1");
+});
+
+test("formatNumber() number with decimals partial in input 12 345.1 on blur with padDecimals", () => {
+    const result = numberHelpers.formatNumber(
+        "12345.1",
+        { separator: " ", decimals: 2, padDecimals: true },
         "blur",
     );
     expect(result).toEqual("12 345.10");
@@ -69,22 +87,13 @@ test("formatNumber() number with decimals overflow in input 12 345.1 on change",
     expect(result).toEqual("12 345.1");
 });
 
-test("formatNumber() number with decimals overflow in input 12 345.1 changes decimal on change", () => {
+test("formatNumber() removes wrong separator 123451,09 for decimal on change", () => {
     const result = numberHelpers.formatNumber(
-        "12345,10",
+        "123451,09",
         { separator: " ", decimals: 2, delimiter: "." },
         "change",
     );
-    expect(result).toEqual("12 345.10");
-});
-
-test("formatNumber() replaces mistake wong separator 123451,09 for decimal on change", () => {
-    const result = numberHelpers.formatNumber(
-        "123451,09",
-        { separator: ",", decimals: 2, delimiter: "." },
-        "change",
-    );
-    expect(result).toEqual("123,451.09");
+    expect(result).toEqual("12 345 109");
 });
 
 test("formatNumber() does not add numbers for . on change ", () => {
@@ -100,6 +109,15 @@ test("formatNumber() adds whole number for . on blur ", () => {
     const result = numberHelpers.formatNumber(
         ".",
         { separator: ",", decimals: 2, delimiter: "." },
+        "blur",
+    );
+    expect(result).toEqual("0");
+});
+
+test("formatNumber() adds whole number for . on blur with pad decimals", () => {
+    const result = numberHelpers.formatNumber(
+        ".",
+        { separator: ",", decimals: 2, delimiter: ".", padDecimals: true },
         "blur",
     );
     expect(result).toEqual("0.00");
@@ -120,7 +138,28 @@ test("formatNumber() adds whole number for .1 on blur ", () => {
         { separator: ",", decimals: 2, delimiter: "." },
         "blur",
     );
+    expect(result).toEqual("0.1");
+});
+
+test("formatNumber() adds whole number for .1 on blur with padDecimals", () => {
+    const result = numberHelpers.formatNumber(
+        ".1",
+        { separator: ",", decimals: 2, delimiter: ".", padDecimals: true },
+        "blur",
+    );
     expect(result).toEqual("0.10");
+});
+
+test("formatNumber() with same delimiter and separator", () => {
+    // This dosen't really make any sense but this test is here to ensure
+    // what happens if the implementation is changed later so we at least
+    // have an idea of what might happen.
+    const result = numberHelpers.formatNumber(
+        "12345.34545",
+        { separator: ".", decimals: 2, delimiter: ".", padDecimals: true },
+        "blur",
+    );
+    expect(result).toEqual("12.345.34");
 });
 
 test("checkDidRemoveDecimalDelimiter()", () => {
@@ -140,3 +179,4 @@ test("checkDidRemoveDecimalDelimiter()", () => {
     );
     expect(result).toEqual(false);
 });
+``;

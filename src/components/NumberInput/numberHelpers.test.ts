@@ -1,3 +1,5 @@
+import { expect, test } from "vitest";
+
 import * as numberHelpers from "./numberHelpers";
 
 test("formatNumber() number empty on blur", () => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { NumberInputOptions } from "./types";
-interface NumberInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface NumberInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     options: NumberInputOptions;
 }
-declare const NumberInput: ({ options, defaultValue, onChange, onBlur, ...props }: NumberInputProps) => JSX.Element;
+declare const NumberInput: ({ options, defaultValue, onChange, onBlur, ...props }: NumberInputProps) => import("react/jsx-runtime").JSX.Element;
 export default NumberInput;

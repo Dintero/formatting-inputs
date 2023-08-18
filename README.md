@@ -61,7 +61,7 @@ yarn test
 
 # Storybook
 
-See a list of potential use cases. Also handy during development to test multiple permuations of the options in one place.
+See a list of potential use cases. Also handy during development to test multiple permutations of the options in one place.
 
 ```
 yarn storybook

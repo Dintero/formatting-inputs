@@ -1,3 +1,5 @@
+import { expect, test } from "vitest";
+
 import * as blocksRangeHelpers from "./blocksRangeHelpers";
 
 test("formatBlocksRange() full value formatted", () => {

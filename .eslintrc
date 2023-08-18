@@ -13,5 +13,12 @@
     "rules": {
         "react/react-in-jsx-scope": "off",
         "jsx-a11y/no-autofocus": "off"
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx", ".ts", ".tsx", ".d.ts"]
+            }
+        }
     }
 }

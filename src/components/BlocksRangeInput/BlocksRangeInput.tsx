@@ -4,14 +4,14 @@ import {
     createBlurEventManipulator,
     createChangeEventManipulator,
 } from "../helpers";
-import { InputManipulator } from "../types";
+import type { InputManipulator } from "../types";
 import {
     checkShouldAddTrailingSeparator,
     formatBlocksRange,
 } from "./blocksRangeHelpers";
-import { BlocksRangeInputOptions } from "./types";
+import type { BlocksRangeInputOptions } from "./types";
 
-interface BlocksRangeInputProps
+export interface BlocksRangeInputProps
     extends React.InputHTMLAttributes<HTMLInputElement> {
     options: BlocksRangeInputOptions;
 }

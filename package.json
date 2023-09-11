@@ -25,7 +25,7 @@
         "@storybook/addon-links": "^7.0.26",
         "@storybook/builder-vite": "^0.4.2",
         "@storybook/cli": "^7.1.1",
-        "@storybook/react": "^7.1.0",
+        "@storybook/react": "^7.4.1",
         "@storybook/react-vite": "^7.1.1",
         "@storybook/testing-library": "^0.1.0",
         "@trivago/prettier-plugin-sort-imports": "^4.1.1",

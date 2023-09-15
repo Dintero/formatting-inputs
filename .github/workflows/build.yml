@@ -17,10 +17,4 @@ jobs:
                   node-version: "lts/*"
                   cache: npm
 
-            - name: yarn install, build and test
-              run: |
-                  yarn install
-                  yarn test
-                  yarn build
-                  yarn prettier-check
-                  yarn build-storybook
+            - run: make test build prettier-check build-storybook

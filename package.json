@@ -22,7 +22,7 @@
         "@storybook/addon-interactions": "7.4.2",
         "@storybook/addon-links": "7.4.2",
         "@storybook/cli": "7.4.2",
-        "@storybook/react": "7.4.2",
+        "@storybook/react": "7.4.5",
         "@storybook/react-vite": "7.4.2",
         "@storybook/testing-library": "0.2.1",
         "@trivago/prettier-plugin-sort-imports": "4.2.0",

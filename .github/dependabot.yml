@@ -8,3 +8,24 @@ updates:
           prefix: fix
           prefix-development: chore
           include: scope
+      groups:
+          react:
+              patterns:
+                  - "react"
+                  - "react-dom"
+          storybook:
+              patterns:
+                  - "@storybook/*"
+                  - "storybook"
+          vite:
+              pattenrs:
+                  - "vite"
+                  - "vite-plugin-dts"
+                  - "vitest"
+          eslint:
+              patterns:
+                  - "eslint"
+                  - "eslint-*"
+                  - "@typescript-eslint/eslint-plugin"
+                  - "@typescript-eslint/parser"
+                  - "@trivago/prettier-plugin-sort-imports"

@@ -11,6 +11,8 @@ updates:
       groups:
           react:
               patterns:
+                  - "@types/react"
+                  - "@types/react-dom"
                   - "react"
                   - "react-dom"
           storybook:
@@ -18,7 +20,7 @@ updates:
                   - "@storybook/*"
                   - "storybook"
           vite:
-              pattenrs:
+              patterns:
                   - "vite"
                   - "vite-plugin-dts"
                   - "vitest"

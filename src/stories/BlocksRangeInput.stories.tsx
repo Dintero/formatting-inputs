@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { Meta, StoryFn } from "@storybook/react";
 import React from "react";
 
 import BlocksRangeInput from "../components/BlocksRangeInput";
@@ -8,10 +8,10 @@ export default {
     title: "Example/BlocksRangeInput",
     component: BlocksRangeInput,
     // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-} as ComponentMeta<typeof BlocksRangeInput>;
+} as Meta<typeof BlocksRangeInput>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof BlocksRangeInput> = (args) => (
+const Template: StoryFn<typeof BlocksRangeInput> = (args) => (
     <BlocksRangeInput {...args} />
 );
 

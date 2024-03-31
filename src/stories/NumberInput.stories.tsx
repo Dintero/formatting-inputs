@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { Meta, StoryFn } from "@storybook/react";
 import React from "react";
 
 import NumberInput from "../components/NumberInput";
@@ -8,10 +8,10 @@ export default {
     title: "Example/NumberInput",
     component: NumberInput,
     // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-} as ComponentMeta<typeof NumberInput>;
+} as Meta<typeof NumberInput>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof NumberInput> = (args) => (
+const Template: StoryFn<typeof NumberInput> = (args) => (
     <NumberInput {...args} />
 );
 

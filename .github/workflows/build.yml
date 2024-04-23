@@ -17,4 +17,4 @@ jobs:
                   node-version: "lts/*"
                   cache: npm
 
-            - run: make test build prettier-check build-storybook
+            - run: make test build lint build-storybook

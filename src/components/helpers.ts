@@ -1,4 +1,4 @@
-import { InputManipulator } from "./types";
+import type { InputManipulator } from "./types";
 
 export const createChangeEventManipulator = (
     ref: React.RefObject<HTMLInputElement>,

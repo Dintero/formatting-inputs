@@ -1,5 +1,5 @@
-import { ManipulatorEventType } from "../types";
-import { NumberInputOptions } from "./types";
+import type { ManipulatorEventType } from "../types";
+import type { NumberInputOptions } from "./types";
 
 const DEFAULT_DELIMITER = ".";
 const DEFAULT_SEPARATOR = " ";

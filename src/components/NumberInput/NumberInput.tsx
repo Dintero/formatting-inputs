@@ -4,9 +4,9 @@ import {
     createBlurEventManipulator,
     createChangeEventManipulator,
 } from "../helpers";
-import { InputManipulator } from "../types";
+import type { InputManipulator } from "../types";
 import { checkDidRemoveDecimalDelimiter, formatNumber } from "./numberHelpers";
-import { NumberInputOptions } from "./types";
+import type { NumberInputOptions } from "./types";
 
 export interface NumberInputProps
     extends React.InputHTMLAttributes<HTMLInputElement> {

@@ -45,9 +45,9 @@
         "storybook": "8.0.9",
         "typescript": "5.4.5",
         "typescript-eslint": "7.8.0",
-        "vite": "5.2.10",
-        "vite-plugin-dts": "3.9.0",
-        "vitest": "1.5.2"
+        "vite": "5.2.11",
+        "vite-plugin-dts": "3.9.1",
+        "vitest": "1.6.0"
     },
     "files": [
         "dist"

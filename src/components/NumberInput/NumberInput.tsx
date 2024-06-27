@@ -1,4 +1,5 @@
-import React, { useMemo, useRef } from "react";
+import type React from "react";
+import { useMemo, useRef } from "react";
 
 import {
     createBlurEventManipulator,
@@ -67,7 +68,7 @@ const NumberInput = ({
     const formattedDefaultValue = useMemo(
         () =>
             formatNumber(
-                defaultValue ? defaultValue + "" : "",
+                defaultValue ? `${defaultValue}` : "",
                 options,
                 "blur",
             ),

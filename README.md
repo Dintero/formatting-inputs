@@ -67,17 +67,19 @@ See a list of potential use cases. Also handy during development to test multipl
 yarn storybook
 ```
 
-# Prettier
+# biome
 
-Used for codestyle.
+Used for codestyle and lint
 
 ```
-yarn prettier-fix
+# fix formatting
+yarn prettier --write
+
+# lint
+yarn lint
 ```
 
 # Build
-
-Used for codestyle.
 
 ```
 yarn build

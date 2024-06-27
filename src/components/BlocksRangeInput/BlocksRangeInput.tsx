@@ -1,4 +1,5 @@
-import React, { useMemo, useRef } from "react";
+import type React from "react";
+import { useMemo, useRef } from "react";
 
 import {
     createBlurEventManipulator,
@@ -71,7 +72,7 @@ const BlocksRangeInput = ({
     const formattedDefaultValue = useMemo(
         () =>
             formatBlocksRange(
-                defaultValue ? defaultValue + "" : "",
+                defaultValue ? `${defaultValue}` : "",
                 options,
                 false,
             ),

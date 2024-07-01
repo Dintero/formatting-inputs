@@ -19,6 +19,7 @@ const removeBlocksRangeFormat = (
     range: RegExp | undefined,
 ) => {
     if (range) {
+        // biome-ignore lint: Reassigning a function parameter is confusing.
         chars = chars.filter((c) => range.test(c));
     }
     return chars.filter(
@@ -89,6 +90,7 @@ const hasFullLengthOrMore = (
         0,
     );
     const separatorsLength = new Array(
+        // biome-ignore lint: The comma operator is disallowed.
         (Math.max((options.blocks ?? []).length - 1), 0),
     )
         .fill("")

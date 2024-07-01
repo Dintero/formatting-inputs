@@ -181,4 +181,3 @@ test("checkDidRemoveDecimalDelimiter()", () => {
     );
     expect(result).toEqual(false);
 });
-``;

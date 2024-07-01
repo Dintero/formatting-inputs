@@ -1,5 +1,6 @@
-import React from "react";
-import { NumberInputOptions } from "./types";
+import { default as React } from 'react';
+import { NumberInputOptions } from './types';
+
 export interface NumberInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     options: NumberInputOptions;
 }

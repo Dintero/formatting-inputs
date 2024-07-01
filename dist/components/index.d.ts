@@ -1,6 +1,5 @@
-import BlocksRangeInput from "./BlocksRangeInput";
-import type { BlocksRangeInputProps } from "./BlocksRangeInput";
-import NumberInput from "./NumberInput";
-import type { NumberInputProps } from "./NumberInput";
+import { default as BlocksRangeInput, BlocksRangeInputProps } from './BlocksRangeInput';
+import { default as NumberInput, NumberInputProps } from './NumberInput';
+
 export { NumberInput, BlocksRangeInput };
 export type { BlocksRangeInputProps, NumberInputProps };

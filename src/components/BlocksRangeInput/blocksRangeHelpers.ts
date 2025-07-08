@@ -19,7 +19,6 @@ const removeBlocksRangeFormat = (
     range: RegExp | undefined,
 ) => {
     if (range) {
-        // biome-ignore lint: Reassigning a function parameter is confusing.
         chars = chars.filter((c) => range.test(c));
     }
     return chars.filter(

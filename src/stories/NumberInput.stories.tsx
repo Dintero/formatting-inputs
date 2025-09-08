@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react";
+// biome-ignore lint/correctness/noUnusedImports: React is needed for JSX runtime
 import React from "react";
 
 import NumberInput from "../components/NumberInput";

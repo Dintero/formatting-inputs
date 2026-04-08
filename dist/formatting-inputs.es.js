@@ -1,185 +1,82 @@
-import { useMemo as m, useRef as D } from "react";
-const p = (e, r, n) => (t) => {
-  const o = e.current;
-  o && r(o, "change"), n && n(t);
-}, S = (e, r, n) => (t) => {
-  const o = e.current;
-  o && r(o, "blur"), n && n(t);
-}, f = " ", R = (e) => {
-  const { blocks: r = [], separators: n = [], overflow: t = !1 } = e, o = t ? 0 : 1;
-  return r.length - o > n.length ? [...n, f] : n;
-}, M = (e, r, n) => (n && (e = e.filter((t) => n.test(t))), e.filter(
-  (t) => !(r || [f]).includes(t)
-)), k = (e, r, n, t, o) => {
-  if (!r || r.length === 0)
-    return e.join("");
-  const s = r.map((c, l) => {
-    const a = e.splice(0, c), d = a.length === c, u = l === r.length - 1, i = e.length;
-    if (!u && i || d && o && !u) {
-      const g = (n || [])[l] ?? f;
-      a.push(g);
-    }
-    return a.join("");
-  });
-  return t && e.length && (s.push((n || [])[r.length] || f), s.push(e.join(""))), s.join("");
-}, E = (e, r, n) => {
-  const t = (e || "").split(""), o = r.blocks || [], s = R(r), c = M(
-    t,
-    s,
-    r.range
-  );
-  return k(
-    c,
-    o,
-    s,
-    r.overflow ?? !1,
-    n ?? !1
-  );
-}, F = (e, r) => {
-  const n = (r.blocks ?? []).reduce(
-    (s, c) => s + c,
-    0
-  ), t = new Array(
-    // biome-ignore lint: The comma operator is disallowed.
-    (Math.max((r.blocks ?? []).length - 1), 0)
-  ).fill("").reduce((s, c, l) => {
-    const a = (r.separators ?? [])[l] ?? f;
-    return s + a.length;
-  }, 0), o = n + t;
-  return e.length >= o;
-}, I = (e, r, n, t, o) => {
-  if (n === "change")
-    return t && o;
-  if (n === "blur") {
-    const s = (r.separators ?? [f]).includes(e[e.length - 1]);
-    return !F(e, r) && s;
-  }
-  return !1;
-}, T = (e, r) => {
-  let n = e;
-  return (t, o) => {
-    const { value: s, selectionStart: c, selectionEnd: l } = t, a = n.length < s.length, d = s.length === c && s.length === l, u = I(
-      s,
-      r,
-      o,
-      a,
-      d
-    ), i = E(
-      s,
-      r,
-      u
-    );
-    t.value = i, o === "change" && (d ? (t.selectionStart = i.length, t.selectionEnd = i.length) : (t.selectionStart = c, t.selectionEnd = l)), n = t.value;
-  };
-}, y = ({
-  options: e,
-  defaultValue: r,
-  onChange: n,
-  onBlur: t,
-  ...o
-}) => {
-  const s = m(
-    () => E(
-      r ? `${r}` : "",
-      e,
-      !1
-    ),
-    [r, e]
-  ), c = m(
-    () => T(s, e),
-    [s, e]
-  ), l = D(null);
-  return /* @__PURE__ */ React.createElement(
-    "input",
-    {
-      ref: l,
-      defaultValue: s ?? "",
-      onChange: p(
-        l,
-        c,
-        n
-      ),
-      onBlur: S(l, c, t),
-      ...o
-    }
-  );
-}, A = ".", B = " ", P = 0, $ = !1, C = (e, r, n, t) => (t ? e.replace(/^0+/, "") || "0" : e).split("").reverse().reduce((c, l, a) => {
-  const d = a % 3 === 0 && a > 0;
-  return `${l}${d ? r : ""}${c}`;
-}, "") || (n ? "0" : ""), N = (e, r, n) => {
-  const t = e.substring(0, r);
-  return n ? t.padEnd(r, "0") : t;
-}, L = (e, r, n) => {
-  if (e === "")
-    return "";
-  const {
-    delimiter: t = A,
-    separator: o = B,
-    decimals: s = P,
-    padDecimals: c = $
-  } = r, l = e.includes(t), [a = "", d = ""] = e.split(t).map((b) => b.replace(/\D/g, ""));
-  if (!l && a === "" && d === "")
-    return "";
-  const u = n === "blur" && s > 0 && c, i = N(
-    d,
-    s,
-    u
-  ), h = s > 0 && (l || u);
-  return `${C(
-    a,
-    o,
-    n === "blur" && h,
-    n === "blur"
-  )}${h && !(n === "blur" && i === "") ? t : ""}${i}`;
-}, _ = (e, r, n) => {
-  const { delimiter: t = A } = n, o = e.replace(t, "");
-  return e.includes(t) && o === r;
-}, v = (e, r) => {
-  let n = e;
-  return (t, o) => {
-    const { value: s, selectionStart: c, selectionEnd: l } = t, a = n.length < s.length, d = s.length === c && s.length === l, u = _(
-      n,
-      s,
-      r
-    ), i = L(s, r, o);
-    t.value = i, o === "change" && (d ? (t.selectionStart = i.length, t.selectionEnd = i.length) : a ? (t.selectionStart = (c || 0) + (i.length - s.length), t.selectionEnd = (l || 0) + (i.length - s.length)) : u ? (t.selectionStart = (c || 0) + 1, t.selectionEnd = (l || 0) + 1) : (t.selectionStart = c, t.selectionEnd = l)), n = t.value;
-  };
-}, O = ({
-  options: e,
-  defaultValue: r,
-  onChange: n,
-  onBlur: t,
-  ...o
-}) => {
-  const s = m(
-    () => L(
-      r ? `${r}` : "",
-      e,
-      "blur"
-    ),
-    [r, e]
-  ), c = m(
-    () => v(s, e),
-    [s, e]
-  ), l = D(null);
-  return /* @__PURE__ */ React.createElement(
-    "input",
-    {
-      ref: l,
-      defaultValue: s ?? "",
-      onChange: p(
-        l,
-        c,
-        n
-      ),
-      onBlur: S(l, c, t),
-      inputMode: "decimal",
-      style: { textAlign: "right" },
-      ...o
-    }
-  );
+import { useMemo as e, useRef as t } from "react";
+//#region src/components/helpers.ts
+var n = (e, t, n) => (r) => {
+	let i = e.current;
+	i && t(i, "change"), n && n(r);
+}, r = (e, t, n) => (r) => {
+	let i = e.current;
+	i && t(i, "blur"), n && n(r);
+}, i = " ", a = (e) => {
+	let { blocks: t = [], separators: n = [], overflow: r = !1 } = e, a = +!r;
+	return t.length - a > n.length ? [...n, i] : n;
+}, o = (e, t, n) => (n && (e = e.filter((e) => n.test(e))), e.filter((e) => !(t || [i]).includes(e))), s = (e, t, n, r, a) => {
+	if (!t || t.length === 0) return e.join("");
+	let o = t.map((r, o) => {
+		let s = e.splice(0, r), c = s.length === r, l = o === t.length - 1, u = e.length;
+		if (!l && u || c && a && !l) {
+			let e = (n || [])[o] ?? i;
+			s.push(e);
+		}
+		return s.join("");
+	});
+	return r && e.length && (o.push((n || [])[t.length] || i), o.push(e.join(""))), o.join("");
+}, c = (e, t, n) => {
+	let r = (e || "").split(""), i = t.blocks || [], c = a(t);
+	return s(o(r, c, t.range), i, c, t.overflow ?? !1, n ?? !1);
+}, l = (e, t) => {
+	let n = (t.blocks ?? []).reduce((e, t) => e + t, 0) + Array((Math.max((t.blocks ?? []).length - 1), 0)).fill("").reduce((e, n, r) => e + ((t.separators ?? [])[r] ?? i).length, 0);
+	return e.length >= n;
+}, u = (e, t, n, r, a) => {
+	if (n === "change") return r && a;
+	if (n === "blur") {
+		let n = (t.separators ?? [i]).includes(e[e.length - 1]);
+		return !l(e, t) && n;
+	}
+	return !1;
+}, d = (e, t) => {
+	let n = e;
+	return (e, r) => {
+		let { value: i, selectionStart: a, selectionEnd: o } = e, s = n.length < i.length, l = i.length === a && i.length === o, d = c(i, t, u(i, t, r, s, l));
+		e.value = d, r === "change" && (l ? (e.selectionStart = d.length, e.selectionEnd = d.length) : (e.selectionStart = a, e.selectionEnd = o)), n = e.value;
+	};
+}, f = ({ options: i, defaultValue: a, onChange: o, onBlur: s, ...l }) => {
+	let u = e(() => c(a ? `${a}` : "", i, !1), [a, i]), f = e(() => d(u, i), [u, i]), p = t(null);
+	return /* @__PURE__ */ React.createElement("input", {
+		ref: p,
+		defaultValue: u ?? "",
+		onChange: n(p, f, o),
+		onBlur: r(p, f, s),
+		...l
+	});
+}, p = ".", m = " ", h = 0, g = !1, _ = (e, t, n, r) => (r ? e.replace(/^0+/, "") || "0" : e).split("").reverse().reduce((e, n, r) => `${n}${r % 3 == 0 && r > 0 ? t : ""}${e}`, "") || (n ? "0" : ""), v = (e, t, n) => {
+	let r = e.substring(0, t);
+	return n ? r.padEnd(t, "0") : r;
+}, y = (e, t, n) => {
+	if (e === "") return "";
+	let { delimiter: r = p, separator: i = m, decimals: a = h, padDecimals: o = g } = t, s = e.includes(r), [c = "", l = ""] = e.split(r).map((e) => e.replace(/\D/g, ""));
+	if (!s && c === "" && l === "") return "";
+	let u = n === "blur" && a > 0 && o, d = v(l, a, u), f = a > 0 && (s || u);
+	return `${_(c, i, n === "blur" && f, n === "blur")}${f && !(n === "blur" && d === "") ? r : ""}${d}`;
+}, b = (e, t, n) => {
+	let { delimiter: r = p } = n, i = e.replace(r, "");
+	return e.includes(r) && i === t;
+}, x = (e, t) => {
+	let n = e;
+	return (e, r) => {
+		let { value: i, selectionStart: a, selectionEnd: o } = e, s = n.length < i.length, c = i.length === a && i.length === o, l = b(n, i, t), u = y(i, t, r);
+		e.value = u, r === "change" && (c ? (e.selectionStart = u.length, e.selectionEnd = u.length) : s ? (e.selectionStart = (a || 0) + (u.length - i.length), e.selectionEnd = (o || 0) + (u.length - i.length)) : l ? (e.selectionStart = (a || 0) + 1, e.selectionEnd = (o || 0) + 1) : (e.selectionStart = a, e.selectionEnd = o)), n = e.value;
+	};
+}, S = ({ options: i, defaultValue: a, onChange: o, onBlur: s, ...c }) => {
+	let l = e(() => y(a ? `${a}` : "", i, "blur"), [a, i]), u = e(() => x(l, i), [l, i]), d = t(null);
+	return /* @__PURE__ */ React.createElement("input", {
+		ref: d,
+		defaultValue: l ?? "",
+		onChange: n(d, u, o),
+		onBlur: r(d, u, s),
+		inputMode: "decimal",
+		style: { textAlign: "right" },
+		...c
+	});
 };
-export {
-  y as BlocksRangeInput,
-  O as NumberInput
-};
+//#endregion
+export { f as BlocksRangeInput, S as NumberInput };

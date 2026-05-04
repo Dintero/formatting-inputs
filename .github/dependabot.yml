@@ -1,38 +1,51 @@
 version: 2
 updates:
-    - package-ecosystem: npm
-      directory: "/"
-      schedule:
-          interval: weekly
-      commit-message:
-          prefix: fix
-          prefix-development: chore
-          include: scope
-      cooldown:
-          default-days: 7
-          semver-major-days: 30
-          semver-minor-days: 7
-          semver-patch-days: 7
-      groups:
-          react:
-              patterns:
-                  - "@types/react"
-                  - "@types/react-dom"
-                  - "react"
-                  - "react-dom"
-          storybook:
-              patterns:
-                  - "@storybook/*"
-                  - "storybook"
-          vite:
-              patterns:
-                  - "vite"
-                  - "vite-plugin-dts"
-                  - "vitest"
-          eslint:
-              patterns:
-                  - "eslint"
-                  - "eslint-*"
-                  - "@typescript-eslint/eslint-plugin"
-                  - "@typescript-eslint/parser"
-                  - "@trivago/prettier-plugin-sort-imports"
+ - package-ecosystem: npm
+   directory: "/"
+   schedule:
+     interval: weekly
+   commit-message:
+     prefix: fix
+     prefix-development: chore
+     include: scope
+   cooldown:
+     default-days: 7
+     semver-major-days: 30
+     semver-minor-days: 7
+     semver-patch-days: 7
+   ignore:
+     - dependency-name: "@storybook/*"
+       versions: [">=9"]
+     - dependency-name: "storybook"
+       versions: [">=9"]
+     - dependency-name: "react"
+       versions: [">=19"]
+     - dependency-name: "react-dom"
+       versions: [">=19"]
+     - dependency-name: "@types/react"
+       versions: [">=19"]
+     - dependency-name: "@types/react-dom"
+       versions: [">=19"]
+   groups:
+     react:
+       patterns:
+         - "@types/react"
+         - "@types/react-dom"
+         - "react"
+         - "react-dom"
+     storybook:
+       patterns:
+         - "@storybook/*"
+         - "storybook"
+     vite:
+       patterns:
+         - "vite"
+         - "vite-plugin-dts"
+         - "vitest"
+     eslint:
+       patterns:
+         - "eslint"
+         - "eslint-*"
+         - "@typescript-eslint/eslint-plugin"
+         - "@typescript-eslint/parser"
+         - "@trivago/prettier-plugin-sort-imports"

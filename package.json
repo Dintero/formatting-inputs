@@ -32,9 +32,9 @@
         "react-dom": "18.3.1",
         "storybook": "8.6.18",
         "typescript": "6.0.3",
-        "vite": "8.3.3",
-        "vite-plugin-dts": "5.1.1",
-        "vitest": "4.1.11"
+        "vite": "8.3.4",
+        "vite-plugin-dts": "5.1.2",
+        "vitest": "5.0.1"
     },
     "files": [
         "dist"
